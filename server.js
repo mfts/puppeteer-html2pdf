@@ -20,6 +20,40 @@ app.get('/pdf', asyncHandler(async (req, res) => {
   const page = await browser.newPage();
 
   await page.goto(url, { waitUntil: 'networkidle2' });
+
+  let div_selector_to_remove= ".wp-block-embed-youtube";
+  await page.evaluate((sel) => {
+      var elements = document.querySelectorAll(sel);
+      for(var i=0; i< elements.length; i++){
+          elements[i].parentNode.removeChild(elements[i]);
+      }
+  }, div_selector_to_remove)
+
+  let div_selector_to_remove2= "#hero-header";
+  await page.evaluate((sel) => {
+      var elements = document.querySelectorAll(sel);
+      for(var i=0; i< elements.length; i++){
+          elements[i].parentNode.removeChild(elements[i]);
+      }
+  }, div_selector_to_remove2)
+  
+  let div_selector_to_remove3= "#jp-relatedposts";
+  await page.evaluate((sel) => {
+      var elements = document.querySelectorAll(sel);
+      for(var i=0; i< elements.length; i++){
+          elements[i].parentNode.removeChild(elements[i]);
+      }
+  }, div_selector_to_remove3)
+
+  let div_selector_to_remove4= "#colophon";
+  await page.evaluate((sel) => {
+      var elements = document.querySelectorAll(sel);
+      for(var i=0; i< elements.length; i++){
+          elements[i].parentNode.removeChild(elements[i]);
+      }
+  }, div_selector_to_remove4)
+  
+
   var pdfBuffer = await page.pdf({
     printBackground: true,
     margin: {
